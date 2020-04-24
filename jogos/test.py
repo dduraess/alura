@@ -11,8 +11,16 @@ for nome_arquivo in arquivos:
     with open(pasta + nome_arquivo, "r") as arquivo:
         csv_reader = csv.reader(arquivo)
         csv_reader.__next__
-        for linha in csv_reader:
-            if linha[2] == "CNPJ":
-                print("({}, {}), ".format(linha[1][:7], linha[1][8:12]), end='')
-            elif linha[2] == "CPF":
-                print("{}, ".format(linha[1][:8]), end='')
+        for operacao, valor, tipo in csv_reader:
+            if tipo == "CNPJ":
+                cnpjs.append(valor)
+                # print("({}, {}), ".format(valor[:7], valor[8:12]))
+            elif tipo == "CPF":
+                cpfs.append(valor)
+                # print("{}, ".format(valor[:8]))
+
+        for item in cnpjs:
+            print("({}, {}), ".format(valor[:7], valor[8:12]))
+
+        for item in cpfs:
+            print("{}, ".format(valor[:8]))
